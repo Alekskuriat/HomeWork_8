@@ -3,9 +3,8 @@ package homework;
 public class Wall extends Let{
     private int height;
 
-    public Wall(int height) {
-        this.height = height;
-        Main.lets.add(this);
+    public Wall() {
+        this.height = Main.random.nextInt(5) + 1;
     }
 
     public int getHeight() {

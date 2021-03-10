@@ -7,20 +7,10 @@ public class Human implements Interface{
     private boolean competitor;
 
     public Human(String name) {
-        this.name = name;
-        abilityRun = 3;
-        abilityJump = 3;
+        this.name = name + ++Main.countHuman;
+        abilityRun = Main.random.nextInt(5) + 1;
+        abilityJump = Main.random.nextInt(5) + 1;
         competitor = true;
-        Main.participants.add(this);
-    }
-
-    public Human(String name, int abilityRun, int abilityJump) {
-        this.name = name;
-        this.abilityRun = abilityRun;
-        this.abilityJump = abilityJump;
-        competitor = true;
-        Main.participants.add(this);
-
     }
 
     @Override
@@ -39,13 +29,19 @@ public class Human implements Interface{
     }
 
     public void jump(Wall wall) {
-        if(this.jumping(abilityRun, wall, name)){
+        if(this.jumping(abilityJump, wall, name)){
             competitor = false;
         }
     }
+
     @Override
     public boolean competitor() {
         return competitor;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 

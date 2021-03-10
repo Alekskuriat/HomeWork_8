@@ -7,19 +7,10 @@ public class Cat implements Interface{
     private boolean competitor;
 
     public Cat(String name) {
-        this.name = name;
-        abilityRun = 2;
-        abilityJump = 2;
+        this.name = name + ++Main.countCat;
+        abilityRun = Main.random.nextInt(5) + 1;
+        abilityJump = Main.random.nextInt(5) + 1;
         competitor = true;
-        Main.participants.add(this);;
-    }
-
-    public Cat(String name, int abilityRun, int abilityJump) {
-        this.name = name;
-        this.abilityRun = abilityRun;
-        this.abilityJump = abilityJump;
-        competitor = true;
-        Main.participants.add(this);
     }
 
     @Override
@@ -38,13 +29,19 @@ public class Cat implements Interface{
     }
 
     public void jump(Wall wall) {
-        if(this.jumping(abilityRun, wall, name)){
+        if(this.jumping(abilityJump, wall, name)){
             competitor = false;
         }
     }
+
     @Override
     public boolean competitor() {
         return competitor;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 

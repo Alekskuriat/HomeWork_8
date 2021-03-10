@@ -3,9 +3,8 @@ package homework;
 public class Treadmill extends Let{
     private int length;
 
-    public Treadmill(int length) {
-        this.length = length;
-        Main.lets.add(this);
+    public Treadmill() {
+        this.length = Main.random.nextInt(5) + 1;
     }
 
     public int getLength() {

@@ -3,6 +3,7 @@ package homework;
 public interface Interface {
     void run(Treadmill treadmill);
     void jump(Wall wall);
+    String getName();
 
     default boolean competitor() {
         return false;
@@ -18,7 +19,6 @@ public interface Interface {
                     + name + " бежит");
         return false;
     }
-
     default boolean jumping(int abilityJump, Wall wall, String name){
         if (abilityJump < wall.getHeight()) {
             System.out.println("Высота препятствия: " + wall.getHeight() + " | "
@@ -30,5 +30,6 @@ public interface Interface {
                     + name + " преодолел препятствие");
         return false;
     }
+
 
 }

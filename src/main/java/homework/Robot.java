@@ -7,19 +7,10 @@ public class Robot implements Interface {
     private boolean competitor;
 
     public Robot(String name) {
-        this.name = name;
-        abilityRun = 5;
-        abilityJump = 4;
+        this.name = name + ++Main.countRobot;
+        abilityRun = Main.random.nextInt(5) + 1;
+        abilityJump = Main.random.nextInt(5) + 1;
         competitor = true;
-        Main.participants.add(this);
-    }
-
-    public Robot(String name, int abilityRun, int abilityJump) {
-        this.name = name;
-        this.abilityRun = abilityRun;
-        this.abilityJump = abilityJump;
-        competitor = true;
-        Main.participants.add(this);
     }
 
     @Override
@@ -38,7 +29,7 @@ public class Robot implements Interface {
     }
 
         public void jump(Wall wall) {
-        if(this.jumping(abilityRun, wall, name)){
+        if(this.jumping(abilityJump, wall, name)){
             competitor = false;
         }
     }
@@ -46,5 +37,10 @@ public class Robot implements Interface {
     @Override
     public boolean competitor() {
         return competitor;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

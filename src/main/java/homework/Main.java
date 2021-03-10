@@ -5,51 +5,45 @@ import java.util.Random;
 
 public class Main {
 
-    public static ArrayList<Interface> participants = new ArrayList<>();
+    public static ArrayList<Interface> participant = new ArrayList<>();
     public static ArrayList<Let> lets = new ArrayList<>();
     public static Random random = new Random();
+    public static int countRobot = 0;
+    public static int countHuman = 0;
+    public static int countCat = 0;
 
     public static void main(String[] args) {
 
-        inviteParticipants();
+        inviteParticipants(10);
 
-        obstruction();
+        obstruction(3);
 
         // Создание полосы препятствий;
         Let[] obstacleCourse = new Let[lets.size()];
         formationOfObstacleCourse(obstacleCourse);
 
-        race(participants, obstacleCourse);
+        race(participant, obstacleCourse);
 
-        winnerAnnouncement(participants);
-
-
+        winnerAnnouncement(participant);
     }
 
-    private static void inviteParticipants() {
-        Human human1 = new Human("Федор");
-        Robot robot1 = new Robot("HS-654");
-        Cat cat1 = new Cat("Мурзик");
-        Human human2 = new Human("Петр");
-        Robot robot2 = new Robot("TG-884");
-        Cat cat2 = new Cat("Томас");
-        Human human3 = new Human("Иван", 5 , 4);
-        Robot robot3 = new Robot("RT-741", 5,2);
-        Cat cat3 = new Cat("Васька", 4,2);
+    private static void inviteParticipants(int numberOfParticipants) {
+        int randomParticipants;
+        for (int i = 0; i < numberOfParticipants; i++) {
+            randomParticipants = random.nextInt(3) ;
+            switch (randomParticipants) {
+                case 0 -> participant.add(new Human("Человек №"));
+                case 1 -> participant.add(new Robot("Робот №"));
+                case 2 -> participant.add(new Cat("Кот №"));
+            }
+        }
     }
 
-    private static void obstruction() {
-        Treadmill treadmill1 = new Treadmill(5);
-        Treadmill treadmill2 = new Treadmill(4);
-        Treadmill treadmill3 = new Treadmill(3);
-        Treadmill treadmill4 = new Treadmill(2);
-        Treadmill treadmill5 = new Treadmill(1);
-
-        Wall wall1 = new Wall(5);
-        Wall wall2 = new Wall(4);
-        Wall wall3 = new Wall(3);
-        Wall wall4 = new Wall(2);
-        Wall wall5 = new Wall(1);
+    private static void obstruction(int pairOfObstacles) {
+        for (int i = 0; i < pairOfObstacles; i++ ){
+            lets.add(new Treadmill());
+            lets.add(new Wall());
+        }
     }
 
     private static void formationOfObstacleCourse(Let[] obstacleCourse) {
@@ -60,12 +54,14 @@ public class Main {
 
     private static void race(ArrayList<Interface> participants, Let[] obstacleCourse) {
         for (Interface participant : participants) {
+           int i = 0;
             for (Let let : obstacleCourse) {
+                i++;
                 let.running(participant, let);
                 let.jumping(participant, let);
-                if (!participant.competitor()) {
-                    break;
-                }
+                if (!participant.competitor())  break;
+                if (i == obstacleCourse.length) System.out.println(participant.getName()
+                        + " прошел все препятствия!\n");
             }
         }
     }
