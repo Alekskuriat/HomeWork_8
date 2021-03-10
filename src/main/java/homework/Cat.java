@@ -1,9 +1,9 @@
 package homework;
 
 public class Cat implements Interface{
-    private String name;
-    private int abilityRun;
-    private int abilityJump;
+    private final String name;
+    private final int abilityRun;
+    private final int abilityJump;
     private boolean competitor;
 
     public Cat(String name) {
@@ -31,32 +31,17 @@ public class Cat implements Interface{
                 '}';
     }
 
-    @Override
     public void run(Treadmill treadmill) {
-        if (abilityRun < treadmill.getLength()) {
-            System.out.println("Длина забега: " + treadmill.getLength() + "       | "
-                    + name + " не может пробежать так много");
-            System.out.println(name + " выбывает из соревнований");
-            competitor = false;
-        } else
-            System.out.println("Длина забега: " + treadmill.getLength() + "       | "
-                    + name + " бежит");
-
+       if(this.running(abilityRun, treadmill, name)){
+           competitor = false;
+       }
     }
 
-    @Override
     public void jump(Wall wall) {
-        if (abilityJump < wall.getHeight()) {
-            System.out.println("Высота препятствия: " + wall.getHeight() + " | "
-                    + name + " не может так высоко прыгнуть");
-            System.out.println(name + " выбывает из соревнований");
+        if(this.jumping(abilityRun, wall, name)){
             competitor = false;
-        } else
-            System.out.println("Высота препятствия: " + wall.getHeight() + " | "
-                    + name + " преодолел препятствие");
-
+        }
     }
-
     @Override
     public boolean competitor() {
         return competitor;

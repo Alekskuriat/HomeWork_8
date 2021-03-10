@@ -1,9 +1,9 @@
 package homework;
 
 public class Robot implements Interface {
-    private String name;
-    private int abilityRun;
-    private int abilityJump;
+    private final String name;
+    private final int abilityRun;
+    private final int abilityJump;
     private boolean competitor;
 
     public Robot(String name) {
@@ -31,28 +31,16 @@ public class Robot implements Interface {
                 '}';
     }
 
-    @Override
     public void run(Treadmill treadmill) {
-        if (abilityRun < treadmill.getLength()) {
-            System.out.println("Длина забега: " + treadmill.getLength() + "       | "
-                    + name + " не может пробежать так много");
-            System.out.println(name + " выбывает из соревнований");
+        if (this.running(abilityRun, treadmill, name)){
             competitor = false;
-        } else
-        System.out.println("Длина забега: " + treadmill.getLength() + "       | "
-                + name + " бежит");
+        }
     }
 
-    @Override
-    public void jump(Wall wall) {
-        if (abilityJump < wall.getHeight()) {
-            System.out.println("Высота препятствия: " + wall.getHeight() + " | "
-                    + name + " не может так высоко прыгнуть");
-            System.out.println(name + " выбывает из соревнований");
+        public void jump(Wall wall) {
+        if(this.jumping(abilityRun, wall, name)){
             competitor = false;
-        } else
-            System.out.println("Высота препятствия: " + wall.getHeight() + " | "
-                    + name + " преодолел препятствие");
+        }
     }
 
     @Override

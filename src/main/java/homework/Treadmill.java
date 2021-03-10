@@ -12,5 +12,8 @@ public class Treadmill extends Let{
         return length;
     }
 
+    public void running(Interface inter, Let let){
+        inter.run((Treadmill) let);
+    }
 
 }

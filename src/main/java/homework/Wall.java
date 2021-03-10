@@ -11,4 +11,8 @@ public class Wall extends Let{
     public int getHeight() {
         return height;
     }
+
+    public void jumping(Interface inter, Let let){
+        inter.jump((Wall) let);
+    }
 }
